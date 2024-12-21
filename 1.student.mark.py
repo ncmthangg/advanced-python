@@ -40,7 +40,7 @@ def input_mark(listCourse, listStudent):
         return
 
     for student in listStudent:
-        score = float(input("Enter the score of the student: "))
+        score = float(input("Enter the score of student " + student["name"] + ": "))
         student[nameCourse + 'score'] = score
 
 #List all students in the course
@@ -53,6 +53,10 @@ def showCourses(listCourse):
     for course in listCourse:
         print(course)
 
+#List all score in a course: 
+def showScore(nameCourse, listStudent):
+    for student in listStudent:
+        print("The score of " + nameCourse + " of " + student["name"] + " is " + str(student[nameCourse + 'score']))
 
 numStudent = num_students()
 listStudent = []
@@ -61,4 +65,4 @@ numCourse = num_courses()
 listCourse = []
 course_info(numCourse, listCourse)
 input_mark(listCourse, listStudent)
-showStudent(listStudent)
+showScore("OOP", listStudent)
