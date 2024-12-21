@@ -6,7 +6,7 @@ def num_students():
 #A function to enter student info based on the number of students
 def student_info(num_student, listStudent):
     for i in range(num_student):
-        print('Enter information of student ' + (i + 1))
+        print('Enter information of student ' + str(i + 1))
         name = input('Name: ')
         id = input('id: ')
         DoB = input('DoB: ')
@@ -27,17 +27,38 @@ def course_info(numCourses, listCourse):
 #A function to Select a course, input marks for student in this course
 def input_mark(listCourse, listStudent):
     nameCourse = input("Please enter the name of the class you want to input the score: ")
+    check = 0
     for course in listCourse:
         if course['name'] == nameCourse:
-            continue
+            check += 1
+            break
         else: 
-            print("The course does not exist!")
-            return
+            continue
+
+    if check == 0:
+        print("The course does not exist!")
+        return
+
     for student in listStudent:
         score = float(input("Enter the score of the student: "))
-        student["f{nameCourse}"] = score
+        student[nameCourse + 'score'] = score
+
+#List all students in the course
+def showStudent(listStudent):
+    for student in listStudent:
+        print(student)
+
+#List all courses
+def showCourses(listCourse):
+    for course in listCourse:
+        print(course)
 
 
-
-
-
+numStudent = num_students()
+listStudent = []
+student_info(numStudent, listStudent)
+numCourse = num_courses()
+listCourse = []
+course_info(numCourse, listCourse)
+input_mark(listCourse, listStudent)
+showStudent(listStudent)
