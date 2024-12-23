@@ -1,3 +1,18 @@
+##Notes:
+##Three main classes: Student, Course, University (soon to add University Class)
+##Student: 
+# Attributes: name, id, DoB, listCourse (for each student)
+# Methods: Getters & Setters, adding Scores of course for each student, GPA calculation
+
+##Course: 
+# Attributes: Name, id, listStudent for each Course 
+# Methods: Getters & Setters, Adding Score for each course
+
+##University: 
+# Attributes: numStudents, numCourses, listStudents, listCourses (All are in form of lists)
+# Methods: Getters & Setters, Displaying all students, displaying all courses
+
+
 class Student: 
     numStudent = 0
     listStudent = []
@@ -53,9 +68,6 @@ class Student:
             print(Person)
             Person.showScore()
 
-
-
-
 class Course: 
     courseNumber = 0
     listCourse = []
@@ -104,6 +116,21 @@ def num_students():
 def num_courses(): 
     num_courses = int(input('Please enter the number of courses: '))
     return num_courses
+
+class University():
+    def __init__(self):
+            self.__numStudents = 0
+            self.__numCourses = 0
+            self.__listStudent = []
+            self.__listCourses = []
+    
+    ##Getters and Setters
+    
+
+
+
+
+
 
 NCMT = Student("Manh Thang", "23BI14403", "19/06/2005")
 HanLe = Student("Han Le Sy", "23BI14403", "31/12/2005")
