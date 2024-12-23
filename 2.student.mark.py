@@ -1,5 +1,5 @@
 ##Notes:
-##Three main classes: Student, Course, University (soon to add University Class)
+##Four main classes: InputInfo (Static), Student, Course, University (soon to add University Class)
 ##Student: 
 # Attributes: name, id, DoB, listCourse (for each student)
 # Methods: Getters & Setters, adding Scores of course for each student, GPA calculation
@@ -11,6 +11,24 @@
 ##University: 
 # Attributes: numStudents, numCourses, listStudents, listCourses (All are in form of lists)
 # Methods: Getters & Setters, Displaying all students, displaying all courses
+
+class InputInfo():
+    @staticmethod
+    def inputStudent():
+        name = input("Please enter the name of the student: ")
+        id = input("Please enter the Student ID: ")
+        DoB = input("Please enter DoB of student: ")
+        newStudent = Student(name, id, DoB)
+        print(f"Finish entering information of Student {name}")
+        return newStudent
+    
+    @staticmethod
+    def inputCourse():
+        name = input("Please enter the course info: ")
+        id = input("Please enter the course ID: ")
+        newCourse = Course(name, id)
+        print(f'Finish entering information of Course {name}')
+        return newCourse
 
 
 class Student: 
@@ -72,30 +90,32 @@ class Course:
     courseNumber = 0
     listCourse = []
 
-    def __init__(self, name, ID, listStudent):
+    def __init__(self, name, ID):
         self.__name = name
         self.__ID = ID
-        self.__listStudent = listStudent
+        self.__listStudent = []
         Course.courseNumber += 1
         Course.listCourse.append(self)
 
     def __str__(self):
         return f"Course name: {self.__name}, ID: {self.__ID}"
 
+    #setters
     def setName (self, name):
         self.__name = name
 
-    def getName(self):
-        return self.__name
-
     def setID (self, id):
         self.__ID = id
+
+    #getters
+    def getName(self):
+        return self.__name   
     
     def getID(self):
         return self.__ID
     
-    # def enrollStudent(self, listStudent):
-    #     self.__listStudent = listStudent
+    def enrollStudent(self, listStudent):
+       self.__listStudent = listStudent
 
     def enterScore(self):
         for Student in self.__listStudent: 
@@ -109,23 +129,57 @@ class Course:
             print(subject)
 
 
-def num_students():
-    a = int(input('Please enter the number of students: '))
-    return a
+# def num_students():
+#     a = int(input('Please enter the number of students: '))
+#     return a
 
-def num_courses(): 
-    num_courses = int(input('Please enter the number of courses: '))
-    return num_courses
+# def num_courses(): 
+#     num_courses = int(input('Please enter the number of courses: '))
+#     return num_courses
 
 class University():
     def __init__(self):
-            self.__numStudents = 0
-            self.__numCourses = 0
-            self.__listStudent = []
-            self.__listCourses = []
+        self.__numStudent = 0
+        self.__numCourses = 0
+        self.__listStudent = []
+        self.__listCourses = []
     
+    #Functions to enter the number of courses 
+    def enterNumStudent(self, numStudent):
+        self.__numStudent = numStudent
+
+    def enterStudent(self): 
+        if (self.__numStudent == 0):
+            numStu = int(input("Please enter the number of students: "))
+            self.enterNumStudent(numStu)
+        
+        for i in range(self.__numStudent): 
+            student = InputInfo.inputStudent()
+            self.__listStudent.append(student)
+
+    def enterNumCourses(self, numCourse):
+        self.__numCourses = numCourse
+
+    def enterCourse(self): 
+        if (self.__numCourses == 0):
+            numCoursee = int(input("Please enter the number of courses: "))
+            self.enterNumCourses(numCoursee)
+
+        for i in range(self.__numCourses):
+            course = InputInfo.inputCourse()
+            self.__listCourses.append(course)
+        
+
+    #Functions to display all Courses
+    def displayCourse(self):
+        for course in self.__listCourses:
+            print(course)
+    
+    def displayStudent(self):
+        for student in self.__listStudent:
+            print(student)
     ##Getters and Setters
-    
+
 
 
 
@@ -135,17 +189,11 @@ class University():
 NCMT = Student("Manh Thang", "23BI14403", "19/06/2005")
 HanLe = Student("Han Le Sy", "23BI14403", "31/12/2005")
 Ngoc = Student("Ngoc", "23BI12345", "12/3/2005")
-a = num_courses()
 
-for i in range(a):
-    courseName = input("Enter the course name: ")
-    courseID = input("Enter course ID: ")
-    Course(courseName, courseID, Student.listStudent)
 
-for course in Course.listCourse:
-    course.enterScore()
-
-Student.listAllStudent()
-Course.listAllCourse()
-
+USTH = University()
+USTH.enterCourse()
+USTH.enterStudent()
+USTH.displayCourse()
+USTH.displayStudent()
 
